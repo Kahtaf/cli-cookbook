@@ -2,7 +2,7 @@ import {Command, Flags} from '@oclif/core'
 import {inventories} from '../../repository/inventories'
 
 export default class InventoryAdd extends Command {
-  static description = 'describe the command here'
+  static description = 'Add an item to the specified inventory'
 
   static examples = [
     'ccb inventory add myFridge --item=eggs --quantity=1 --unit=count',

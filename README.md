@@ -250,9 +250,9 @@ DESCRIPTION
 ccb inventory create myFridge
 ccb inventory add myFridge --item=eggs --quantity=1 --unit=count
 ccb inventory delete myFridge --item=eggs
-ccb inventory update myFridge --item=eggs --quantity=1 --unit=count
+ccb inventory list myFridge
 
-ccb recipe create pancakes --instructions="" 
+ccb recipe create pancakes --instructions=""
 ccb recipe update pancakes --instructions="" 
 ccb recipe add-ingredient pancakes --item=eggs --quantity=1 --unit=count
 ccb recipe delete-ingredient pancakes --item=eggs

@@ -11,6 +11,11 @@ class Inventories extends BaseRepository {
     return this.repository.getObject<InventoryItem[]>(`/${inventoryName}/items`)
   }
 
+  delete(inventoryName: string) {
+    this.validateInventoryItem(inventoryName)
+    this.repository.delete(`/${inventoryName}`)
+  }
+
   addItem(inventoryName: string, itemName: string, quantity = 1, unit = 'count'): InventoryItem {
     this.validateInventoryItem(inventoryName, quantity)
     const items = this.repository.getObject<InventoryItem[]>(`/${inventoryName}/items`)
