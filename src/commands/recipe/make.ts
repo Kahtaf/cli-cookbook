@@ -22,11 +22,11 @@ export default class RecipeMake extends Command {
     const inventoryItems = inventories.getItems(flags.inventory)
 
     for (const recipeName of recipeNames) {
-      const ingredients = recipes.getItems(recipeName)
+      const recipe = recipes.getRecipe(recipeName)
       const checkedIngredients = []
 
-      this.log(`\nChecking recipe: ${recipeName}`)
-      for (const ingredient of ingredients) {
+      this.log(`\nRecipe: ${recipeName}`)
+      for (const ingredient of recipe.ingredients) {
         const availableItem = inventoryItems.find(i => i.name === ingredient.name)
         const checkedIngredient = {
           name: ingredient.name,
@@ -59,11 +59,12 @@ export default class RecipeMake extends Command {
           get: row => `${row.quantityAvailable} ${row.unit}`,
         },
         quantityMissing: {
-          header: 'Missing ingredients',
+          header: 'Missing',
           minWidth: 10,
           get: row => row.quantityMissing > 0 ? `${row.quantityMissing} ${row.unit}` : '-',
         },
       })
+      this.log(`Instructions: ${recipe.instructions}`)
     }
   }
 }

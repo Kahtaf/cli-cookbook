@@ -10,9 +10,9 @@ class Recipes extends BaseRepository {
     this.repository.push(`/${recipeName}`, recipe)
   }
 
-  getItems(recipeName: string): InventoryItem[] {
+  getRecipe(recipeName: string): Recipe {
     this.validateIngredientItem(recipeName)
-    return this.repository.getObject<InventoryItem[]>(`/${recipeName}/ingredients`)
+    return this.repository.getObject<Recipe>(`/${recipeName}`)
   }
 
   delete(recipeName: string) {
