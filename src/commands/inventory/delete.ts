@@ -1,28 +1,29 @@
 import {Command, Flags} from '@oclif/core'
+import {inventories} from '../../repository/inventories'
 
 export default class InventoryDelete extends Command {
-  static description = 'describe the command here'
+  static description = 'Deletes an item from an inventory, if it exists'
 
   static examples = [
-    '<%= config.bin %> <%= command.id %>',
+    'ccb inventory delete myFridge --item=eggs',
   ]
 
   static flags = {
-    // flag with a value (-n, --name=VALUE)
-    name: Flags.string({char: 'n', description: 'name to print'}),
-    // flag with no value (-f, --force)
-    force: Flags.boolean({char: 'f'}),
+    item: Flags.string({char: 'i', description: 'Name of the item to remove from the inventory', required: true}),
+    quantity: Flags.integer({char: 'q', description: 'Quantity of the item to remove'}),
   }
 
-  static args = [{name: 'file'}]
+  static args = [{name: 'inventoryName', description: 'Name of the inventory to remove an item from', required: true}]
 
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(InventoryDelete)
+    const inventoryName = args.inventoryName ?? 'inventory'
 
-    const name = flags.name ?? 'world'
-    this.log(`hello ${name} from /Users/kahtaf.alam/Documents/personal_projects/cli-cookbook/src/commands/inventory/delete.ts`)
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`)
+    const deletedItem = inventories.deleteItem(inventoryName, flags.item, flags.quantity ?? 0)
+    if (deletedItem) {
+      this.log(`${inventoryName} now has ${deletedItem.quantity} ${deletedItem.unit} of ${deletedItem.name}`)
+    } else {
+      this.log(`Removed ${flags.item} from ${inventoryName}`)
     }
   }
 }

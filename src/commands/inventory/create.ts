@@ -16,7 +16,7 @@ export default class InventoryCreate extends Command {
     const {args} = await this.parse(InventoryCreate)
     const inventoryName = args.inventoryName ?? 'inventory'
 
-    inventories.create(args.inventoryName)
+    inventories.create(inventoryName)
     this.log(`Created a new inventory: ${inventoryName}`)
   }
 }

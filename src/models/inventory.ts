@@ -1,9 +1,9 @@
 interface Inventory {
   name: string
-  items: InventoryItems[]
+  items: InventoryItem[]
 }
 
-interface InventoryItems {
+interface InventoryItem {
   name: string
   quantity: number
   unit: string

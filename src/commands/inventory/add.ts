@@ -1,28 +1,26 @@
 import {Command, Flags} from '@oclif/core'
+import {inventories} from '../../repository/inventories'
 
 export default class InventoryAdd extends Command {
   static description = 'describe the command here'
 
   static examples = [
-    '<%= config.bin %> <%= command.id %>',
+    'ccb inventory add myFridge --item=eggs --quantity=1 --unit=count',
   ]
 
   static flags = {
-    // flag with a value (-n, --name=VALUE)
-    name: Flags.string({char: 'n', description: 'name to print'}),
-    // flag with no value (-f, --force)
-    force: Flags.boolean({char: 'f'}),
+    item: Flags.string({char: 'i', description: 'Name of the item to add to the inventory', required: true}),
+    quantity: Flags.integer({char: 'q', description: 'Quantity of the item to add'}),
+    unit: Flags.string({char: 'u', description: 'Unit of the item (count, cups, liters)'}),
   }
 
-  static args = [{name: 'file'}]
+  static args = [{name: 'inventoryName', description: 'Name of the inventory to add an item to', required: true}]
 
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(InventoryAdd)
+    const inventoryName = args.inventoryName ?? 'inventory'
 
-    const name = flags.name ?? 'world'
-    this.log(`hello ${name} from /Users/kahtaf.alam/Documents/personal_projects/cli-cookbook/src/commands/inventory/add.ts`)
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`)
-    }
+    const addedItem = inventories.addItem(inventoryName, flags.item, flags.quantity, flags.unit)
+    this.log(`${inventoryName} now has ${addedItem.quantity} ${addedItem.unit} of ${addedItem.name}`)
   }
 }
