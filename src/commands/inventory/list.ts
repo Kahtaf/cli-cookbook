@@ -1,5 +1,6 @@
 import {CliUx, Command} from '@oclif/core'
 import {inventories} from '../../repository/inventories'
+import {InventoryItem} from '../../models/inventory'
 
 export default class InventoryList extends Command {
   static description = 'Lists all items in an inventory'
@@ -18,6 +19,8 @@ export default class InventoryList extends Command {
 
     const items: InventoryItem[] = inventories.getItems(inventoryName)
     this.log(`List of items in ${inventoryName}`)
+
+    // Render a table from records
     CliUx.ux.table(items as Record<string, any>[], {
       name: {
         header: 'Item',

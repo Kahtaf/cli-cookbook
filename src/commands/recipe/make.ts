@@ -36,13 +36,16 @@ export default class RecipeMake extends Command {
           quantityMissing: 0,
         }
 
+        // Check if inventory has the required amount of the ingredient
         const quantityMissing = checkedIngredient.quantityAvailable - ingredient.quantity
         if (quantityMissing < 0) {
           checkedIngredient.quantityMissing = Math.abs(quantityMissing)
         }
+
         checkedIngredients.push(checkedIngredient)
       }
 
+      // Render table of required and inventoried ingredients
       CliUx.ux.table(checkedIngredients as Record<string, any>[], {
         name: {
           header: 'Ingredient',

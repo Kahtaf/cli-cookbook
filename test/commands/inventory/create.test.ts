@@ -1,17 +1,11 @@
 import {expect, test} from '@oclif/test'
 
-describe('inventory:create', () => {
+describe('create an inventory', () => {
   test
   .stdout()
-  .command(['inventory:create'])
-  .it('runs hello', ctx => {
-    expect(ctx.stdout).to.contain('hello world')
-  })
-
-  test
-  .stdout()
-  .command(['inventory:create', '--name', 'jeff'])
-  .it('runs hello --name jeff', ctx => {
-    expect(ctx.stdout).to.contain('hello jeff')
+  .command(['inventory:create', 'myFridge'])
+  .it('runs inventory create', ctx => {
+    expect(ctx.stdout).to.contain('Created a new inventory')
   })
 })
+

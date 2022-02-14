@@ -1,17 +1,10 @@
 import {expect, test} from '@oclif/test'
 
-describe('recipe:add-ingredient', () => {
+describe('adds ingredient to recipe', () => {
   test
   .stdout()
-  .command(['recipe:add-ingredient'])
-  .it('runs hello', ctx => {
-    expect(ctx.stdout).to.contain('hello world')
-  })
-
-  test
-  .stdout()
-  .command(['recipe:add-ingredient', '--name', 'jeff'])
-  .it('runs hello --name jeff', ctx => {
-    expect(ctx.stdout).to.contain('hello jeff')
+  .command(['recipe:add-ingredient', 'pancakes', '--item', 'eggs', '--quantity', '1', '--unit', 'count'])
+  .it('runs recipe add-ingredient', ctx => {
+    expect(ctx.stdout).to.match(/pancakes now has .*\d count of eggs/i)
   })
 })

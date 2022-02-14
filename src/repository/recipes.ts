@@ -1,6 +1,14 @@
 import {BaseRepository} from './base-repository'
+import {Recipe} from '../models/recipe'
+import {InventoryItem} from '../models/inventory'
 
 class Recipes extends BaseRepository {
+  /**
+   * Creates or updates a recipe
+   * @param recipeName
+   * @param instructions
+   * @param update
+   */
   create(recipeName: string, instructions: string, update = false) {
     if (update) {
       this.validateIngredientItem(recipeName)
@@ -10,16 +18,31 @@ class Recipes extends BaseRepository {
     this.repository.push(`/${recipeName}`, recipe)
   }
 
+  /**
+   * Returns a recipe, ingredients, and its instructions
+   * @param recipeName
+   */
   getRecipe(recipeName: string): Recipe {
     this.validateIngredientItem(recipeName)
     return this.repository.getObject<Recipe>(`/${recipeName}`)
   }
 
+  /**
+   * Deletes a recipe
+   * @param recipeName
+   */
   delete(recipeName: string) {
     this.validateIngredientItem(recipeName)
     this.repository.delete(`/${recipeName}`)
   }
 
+  /**
+   * Adds an ingredient to a recipe
+   * @param recipeName
+   * @param itemName
+   * @param quantity
+   * @param unit
+   */
   addIngredient(recipeName: string, itemName: string, quantity = 1, unit = 'count'): InventoryItem {
     this.validateIngredientItem(recipeName, quantity)
     const items = this.repository.getObject<InventoryItem[]>(`/${recipeName}/ingredients`)
@@ -40,6 +63,12 @@ class Recipes extends BaseRepository {
     return ingredient
   }
 
+  /**
+   * Deletes an ingredient from a recipe
+   * @param recipeName
+   * @param item
+   * @param quantity
+   */
   deleteIngredient(recipeName: string, item: string, quantity: number): InventoryItem | null {
     this.validateIngredientItem(recipeName, quantity)
     const items = this.repository.getObject<InventoryItem[]>(`/${recipeName}/ingredients`)
@@ -66,6 +95,12 @@ class Recipes extends BaseRepository {
     return null
   }
 
+  /**
+   * Validates a recipe and its ingredients
+   * @param recipeName
+   * @param quantity
+   * @private
+   */
   private validateIngredientItem(recipeName: string, quantity = 0) {
     if (quantity < 0) {
       throw new Error('Quantity must be bigger than 0')

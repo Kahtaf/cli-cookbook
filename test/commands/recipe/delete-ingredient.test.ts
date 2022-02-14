@@ -1,17 +1,12 @@
 import {expect, test} from '@oclif/test'
 
-describe('recipe:delete-ingredient', () => {
+describe('deletes an ingredient from a recipe', () => {
   test
   .stdout()
-  .command(['recipe:delete-ingredient'])
-  .it('runs hello', ctx => {
-    expect(ctx.stdout).to.contain('hello world')
-  })
-
-  test
-  .stdout()
-  .command(['recipe:delete-ingredient', '--name', 'jeff'])
-  .it('runs hello --name jeff', ctx => {
-    expect(ctx.stdout).to.contain('hello jeff')
+  .command(['recipe:create', 'pancakes', '--instructions', 'test'])
+  .command(['recipe:add-ingredient', 'pancakes', '--item', 'eggs'])
+  .command(['recipe:delete-ingredient', 'pancakes', '--item', 'eggs'])
+  .it('runs recipe delete ingredient', ctx => {
+    expect(ctx.stdout).to.match(/pancakes now has .* count of eggs/)
   })
 })

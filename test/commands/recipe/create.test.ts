@@ -1,17 +1,18 @@
 import {expect, test} from '@oclif/test'
 
-describe('recipe:create', () => {
+describe('create a recipe', () => {
   test
-  .stdout()
-  .command(['recipe:create'])
-  .it('runs hello', ctx => {
-    expect(ctx.stdout).to.contain('hello world')
+  .stderr()
+  .command(['recipe:create', 'pancakes'])
+  .catch(error => {
+    expect(error.message).to.match(/Missing required flag:\n -i, --instructions .*/)
   })
+  .it('requires instructions')
 
   test
   .stdout()
-  .command(['recipe:create', '--name', 'jeff'])
-  .it('runs hello --name jeff', ctx => {
-    expect(ctx.stdout).to.contain('hello jeff')
+  .command(['recipe:create', 'pancakes', '--instructions', 'add water'])
+  .it('runs recipe create', ctx => {
+    expect(ctx.stdout).to.contain('Created new recipe: pancakes')
   })
 })

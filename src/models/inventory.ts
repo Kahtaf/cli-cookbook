@@ -1,9 +1,9 @@
-interface Inventory {
+export interface Inventory {
   name: string
   items: InventoryItem[]
 }
 
-interface InventoryItem {
+export interface InventoryItem {
   name: string
   quantity: number
   unit: string

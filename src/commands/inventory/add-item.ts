@@ -1,11 +1,11 @@
 import {Command, Flags} from '@oclif/core'
 import {inventories} from '../../repository/inventories'
 
-export default class InventoryAdd extends Command {
+export default class InventoryAddItem extends Command {
   static description = 'Add an item to the specified inventory'
 
   static examples = [
-    'ccb inventory add myFridge --item=eggs --quantity=1 --unit=count',
+    'ccb inventory add-item myFridge --item=eggs --quantity=1 --unit=count',
   ]
 
   static flags = {
@@ -17,7 +17,7 @@ export default class InventoryAdd extends Command {
   static args = [{name: 'inventoryName', description: 'Name of the inventory to add an item to', required: true}]
 
   public async run(): Promise<void> {
-    const {args, flags} = await this.parse(InventoryAdd)
+    const {args, flags} = await this.parse(InventoryAddItem)
     const inventoryName = args.inventoryName ?? 'inventory'
 
     const addedItem = inventories.addItem(inventoryName, flags.item, flags.quantity, flags.unit)

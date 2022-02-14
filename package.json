@@ -1,6 +1,6 @@
 {
   "name": "cli-cookbook",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A CLI tool for storing recipes and inventory of ingredients",
   "author": "Kahtaf Alam",
   "bin": {
@@ -49,8 +49,11 @@
     ],
     "topicSeparator": " ",
     "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
+      "inventory": {
+        "description": "Manage different inventories of ingredients"
+      },
+      "recipe": {
+        "description": "Manage recipes and check if they can be made with an inventory"
       }
     }
   },
@@ -58,7 +61,6 @@
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts --config .eslintrc",
     "postpack": "shx rm -f oclif.manifest.json",
-    "posttest": "yarn lint",
     "prepack": "yarn build && oclif manifest && oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md"

@@ -1,17 +1,11 @@
 import {expect, test} from '@oclif/test'
 
-describe('recipe:update', () => {
+describe('updates a recipe', () => {
   test
   .stdout()
-  .command(['recipe:update'])
-  .it('runs hello', ctx => {
-    expect(ctx.stdout).to.contain('hello world')
-  })
-
-  test
-  .stdout()
-  .command(['recipe:update', '--name', 'jeff'])
-  .it('runs hello --name jeff', ctx => {
-    expect(ctx.stdout).to.contain('hello jeff')
+  .command(['recipe:create', 'pancakes', '--instructions', 'old instructions'])
+  .command(['recipe:update', 'pancakes', '--instructions', 'new instructions'])
+  .it('runs recipe create', ctx => {
+    expect(ctx.stdout).to.contain('Updated recipe: pancakes')
   })
 })

@@ -1,0 +1,28 @@
+{
+    "waffles": {
+        "name": "waffles",
+        "instructions": "1. mix 2 cups of waffle mix, 2. add two eggs, 3. mix and bake, 4.serve",
+        "ingredients": [
+            {
+                "name": "eggs",
+                "unit": "count",
+                "quantity": 1
+            },
+            {
+                "name": "brown sugar",
+                "unit": "cups",
+                "quantity": 1
+            },
+            {
+                "name": "waffle mix",
+                "unit": "cups",
+                "quantity": 1
+            }
+        ]
+    },
+    "pancakes": {
+        "name": "pancakes",
+        "instructions": "new instructions",
+        "ingredients": []
+    }
+}
