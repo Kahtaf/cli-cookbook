@@ -15,7 +15,7 @@ A simple CLI application to keep track of recipes and inventories
 yarn install
 yarn build
 
-./bin/run COMMAND
+./bin/run COMMAND (.\bin\run.cmd on Windows)
 running command...
 
 ./bin/run (--version)
