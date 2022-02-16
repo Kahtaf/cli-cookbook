@@ -13,6 +13,7 @@ A simple CLI application to keep track of recipes and inventories
 <!-- usage -->
 ```bash
 yarn install
+yarn build
 
 ./bin/run COMMAND
 running command...
